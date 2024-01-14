@@ -4,11 +4,6 @@ import '../styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'Ethereum Leaderboard',
-  description: 'Unbiased dashboard of Ethereum metrics.',
-}
-
 export default function RootLayout({
   children,
 }: {
