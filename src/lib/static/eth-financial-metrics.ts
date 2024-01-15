@@ -1,3 +1,5 @@
+import { EthFinancialMetrics } from '../types'
+
 export const ethFinancialMetrics = {
   execution_id: '01HM51ZDDD7CGPBC3CJ9C5CR1N',
   query_id: 2352666,
@@ -35,7 +37,7 @@ export const ethFinancialMetrics = {
       },
       { ethereum: 1.5302486836619402, metrics: 'N) 1-Year Sharpe Ratio' },
       { ethereum: 2.650468468317875, metrics: 'O) 3-Year Sharpe Ratio' },
-    ],
+    ] as EthFinancialMetrics[],
     metadata: {
       column_names: ['metrics', 'ethereum'],
       result_set_bytes: 659,

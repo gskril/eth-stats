@@ -1,4 +1,4 @@
-export async function getValidatorCount() {
+export async function getValidatorMetrics() {
   const res = await fetch('https://beaconcha.in/api/v1/validators/queue')
   const json = await res.json()
 
@@ -11,5 +11,5 @@ export async function getValidatorCount() {
     }
   }
 
-  return data.data.validatorscount
+  return data.data
 }
