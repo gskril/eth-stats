@@ -120,7 +120,7 @@ export default async function DashboardPage() {
                   Active Validators
                 </CardTitle>
                 <p className="text-xs text-muted-foreground">
-                  Updated just now
+                  {getLastUpdated(new Date().toLocaleDateString())}
                 </p>
               </CardHeader>
               <CardContent>
