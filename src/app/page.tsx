@@ -1,9 +1,3 @@
-import {
-  Clock4Icon,
-  CoinsIcon,
-  DollarSignIcon,
-  ShieldCheckIcon,
-} from 'lucide-react'
 import { Metadata } from 'next'
 
 import { ActiveAddresses } from '@/components/active-addresses'
@@ -120,7 +114,7 @@ export default async function DashboardPage() {
                   Active Validators
                 </CardTitle>
                 <p className="text-xs text-muted-foreground">
-                  {getLastUpdated(new Date().toLocaleDateString())}
+                  {getLastUpdated(new Date().toISOString())}
                 </p>
               </CardHeader>
               <CardContent>
