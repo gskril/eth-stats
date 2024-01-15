@@ -18,6 +18,8 @@ import {
 } from '@/lib/dune'
 import { formatNumber, getLastUpdated } from '@/lib/utils'
 
+export const revalidate = 3600 // revalidate at most every hour
+
 export const metadata: Metadata = {
   title: 'Ethereum Dashboard',
   description: 'Unbiased dashboard of Ethereum metrics.',
