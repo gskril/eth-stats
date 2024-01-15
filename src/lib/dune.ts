@@ -12,7 +12,7 @@ const dune = new Dune(process.env.DUNE_API_KEY)
 export async function getDailyEthereumParticipants() {
   // https://dune.com/queries/41840
   // const queryId = 41840
-  const executionId = '01HM4RQ061AABE5B04ANSVWWJT'
+  const executionId = '01HM5XQMWMJMP994WSM01KN3H8'
   const data = await dune.results<DailyEthereumParticipants>(executionId)
   return data
 }

@@ -24,7 +24,7 @@ export function formatNumber(
 }
 
 export function getLastUpdated(dateString: string | undefined) {
-  if (!dateString) return 'n/a'
+  if (!dateString) return 'Updated n/a'
 
   const date = new Date(dateString)
   const now = new Date()
@@ -36,7 +36,7 @@ export function getLastUpdated(dateString: string | undefined) {
   const days = Math.floor(hours / 24)
 
   if (days > 0) return `Updated ${days}d ago`
-  if (hours > 0) return `Update ${hours}h ago`
-  if (minutes > 0) return `Update ${minutes}m ago`
+  if (hours > 0) return `Updated ${hours}h ago`
+  if (minutes > 0) return `Updated ${minutes}m ago`
   return `Updated just now`
 }
