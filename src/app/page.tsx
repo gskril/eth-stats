@@ -1,11 +1,13 @@
-import { Metadata } from 'next'
 import {
   Clock4Icon,
   CoinsIcon,
   DollarSignIcon,
   ShieldCheckIcon,
 } from 'lucide-react'
+import { Metadata } from 'next'
 
+import { Overview } from '@/components/overview'
+import { RecentSales } from '@/components/recent-sales'
 import {
   Card,
   CardContent,
@@ -13,14 +15,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Overview } from '@/components/overview'
-import { RecentSales } from '@/components/recent-sales'
+import { getValidatorMetrics } from '@/lib/beaconchain'
 import {
   getDailyEthereumParticipants,
   getEthFinancialMetrics,
   getEthSupplyAndStakingMetrics,
 } from '@/lib/dune'
-import { getValidatorMetrics } from '@/lib/beaconchain'
 import { formatNumber } from '@/lib/utils'
 
 export const metadata: Metadata = {

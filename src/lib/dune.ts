@@ -1,13 +1,12 @@
 import { Dune } from 'dune-api-client'
-import * as fs from 'fs'
 
+import { dailyEthereumParticipants } from './static/daily-ethereum-participants'
+import { ethFinancialMetrics } from './static/eth-financial-metrics'
 import {
   DailyEthereumParticipants,
   EthFinancialMetrics,
   EthSupplyAndStakingMetrics,
 } from './types'
-import { dailyEthereumParticipants } from './static/daily-ethereum-participants'
-import { ethFinancialMetrics } from './static/eth-financial-metrics'
 
 const dune = new Dune(process.env.DUNE_API_KEY)
 
