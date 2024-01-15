@@ -6,8 +6,8 @@ import {
 } from 'lucide-react'
 import { Metadata } from 'next'
 
-import { Overview } from '@/components/overview'
-import { RecentSales } from '@/components/recent-sales'
+import { ActiveAddresses } from '@/components/active-addresses'
+import { L2Tvl } from '@/components/l2-tvl'
 import {
   Card,
   CardContent,
@@ -20,6 +20,7 @@ import {
   getDailyEthereumParticipants,
   getEthFinancialMetrics,
   getEthSupplyAndStakingMetrics,
+  getL2Summary,
 } from '@/lib/dune'
 import { formatNumber } from '@/lib/utils'
 
@@ -33,6 +34,7 @@ export default async function DashboardPage() {
   const validatorMetrics = await getValidatorMetrics()
   const ethSupplyAndStakingMetrics = await getEthSupplyAndStakingMetrics()
   const ethFinancialMetric = await getEthFinancialMetrics()
+  const l2Summary = await getL2Summary()
 
   return (
     <>
@@ -122,21 +124,23 @@ export default async function DashboardPage() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Card className="col-span-4">
               <CardHeader>
-                <CardTitle>Overview</CardTitle>
+                <CardTitle>Daily Active Addresses (L1)</CardTitle>
               </CardHeader>
               <CardContent className="pl-2">
-                <Overview />
+                <ActiveAddresses
+                  dailyParticipants={dailyEthereumParticipants}
+                />
               </CardContent>
             </Card>
             <Card className="col-span-3">
               <CardHeader>
-                <CardTitle>Recent Sales</CardTitle>
+                <CardTitle>Ethereum L2 TVL</CardTitle>
                 <CardDescription>
-                  You made 265 sales this month.
+                  Blockchains that use Ethereum as a base layer for security.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <RecentSales />
+                <L2Tvl data={l2Summary} />
               </CardContent>
             </Card>
           </div>

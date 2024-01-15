@@ -1,11 +1,14 @@
 import { Dune } from 'dune-api-client'
+import * as fs from 'fs'
 
 import { dailyEthereumParticipants } from './static/daily-ethereum-participants'
 import { ethFinancialMetrics } from './static/eth-financial-metrics'
+import { l2Summary } from './static/l2-summary'
 import {
   DailyEthereumParticipants,
   EthFinancialMetrics,
   EthSupplyAndStakingMetrics,
+  L2Summary,
 } from './types'
 
 const dune = new Dune(process.env.DUNE_API_KEY)
@@ -14,10 +17,10 @@ export async function getDailyEthereumParticipants() {
   // https://dune.com/queries/41840
   // const queryId = 41840
   // const executionId = '01HM4RQ061AABE5B04ANSVWWJT'
-  // const data = await dune.results<DailyEthereumNetworkParticipants>(executionId)
-  // return data.result
+  // const data = await dune.results<DailyEthereumParticipants>(executionId)
+  // return data.result?.rows
 
-  return dailyEthereumParticipants.result
+  return dailyEthereumParticipants.result.rows
 }
 
 export async function getEthFinancialMetrics() {
@@ -44,7 +47,7 @@ export async function getEthSupplyAndStakingMetrics() {
   // return data.result?.rows[0]
 
   return {
-    day: new Date(),
+    day: '2024-01-13 00:00:00.000 UTC',
     cir_supply: 120229152.83637705,
     current_staked: 28906659.999999974,
     non_staked: 91322492.83637708,
@@ -68,4 +71,14 @@ export async function getEthSupplyAndStakingMetrics() {
     cir_sup_million: 120.22915283637705,
     mcap_billion: 304.5921426702627,
   }
+}
+
+export async function getL2Summary() {
+  // https://dune.com/queries/2858858
+  // const queryId = 2858858
+  // const executionId = '01HM5SX8Q76PM6PVRQ8AHTDPTG'
+  // const data = await dune.results<L2Summary>('01HM5SX8Q76PM6PVRQ8AHTDPTG')
+  // return data.result?.rows
+
+  return l2Summary.rows
 }

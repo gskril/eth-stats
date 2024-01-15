@@ -28,7 +28,7 @@ export type EthFinancialMetrics = {
 }
 
 export type EthSupplyAndStakingMetrics = {
-  day: Date // this might actually me a string, tbd
+  day: string
   cir_supply: number
   current_staked: number
   non_staked: number
@@ -51,4 +51,20 @@ export type EthSupplyAndStakingMetrics = {
   post_merge_percent: number // this might actually be a string, tbd
   cir_sup_million: number
   mcap_billion: number
+}
+
+export type L2Summary = {
+  day: string
+  entity: string
+  ranking: number
+  revenue?: number
+  stack: string
+  technology: string
+  tvl: number
+  tvl_180d_change?: number
+  tvl_1d_change: number
+  tvl_30d_change?: number
+  tvl_365d_change?: number
+  tvl_7d_change: number
+  tvl_90d_change?: number
 }
