@@ -22,7 +22,7 @@ import {
   getEthSupplyAndStakingMetrics,
   getL2Summary,
 } from '@/lib/dune'
-import { formatNumber } from '@/lib/utils'
+import { formatNumber, getLastUpdated } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Ethereum Dashboard',
@@ -32,8 +32,10 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   const dailyEthereumParticipants = await getDailyEthereumParticipants()
   const validatorMetrics = await getValidatorMetrics()
-  const ethSupplyAndStakingMetrics = await getEthSupplyAndStakingMetrics()
-  const ethFinancialMetric = await getEthFinancialMetrics()
+  const { ethSupplyAndStakingMetricsExec, ethSupplyAndStakingMetrics } =
+    await getEthSupplyAndStakingMetrics()
+  const { ethFinancialMetrics, ethFinancialMetric } =
+    await getEthFinancialMetrics()
   const l2Summary = await getL2Summary()
 
   return (
@@ -50,7 +52,9 @@ export default async function DashboardPage() {
                 <CardTitle className="text-sm font-medium">
                   Ether Price
                 </CardTitle>
-                <DollarSignIcon className="h-4 w-4 text-muted-foreground" />
+                <p className="text-xs text-muted-foreground">
+                  {getLastUpdated(ethFinancialMetrics.execution_ended_at)}
+                </p>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -72,16 +76,21 @@ export default async function DashboardPage() {
                 <CardTitle className="text-sm font-medium">
                   Ether Supply
                 </CardTitle>
-                <CoinsIcon className="h-4 w-4 text-muted-foreground" />
+                <p className="text-xs text-muted-foreground">
+                  {getLastUpdated(ethSupplyAndStakingMetricsExec)}
+                </p>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {formatNumber(ethSupplyAndStakingMetrics.cir_supply)}
+                  {formatNumber(ethSupplyAndStakingMetrics?.cir_supply)}
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {formatNumber(ethSupplyAndStakingMetrics.supply_change_24hr, {
-                    showSign: true,
-                  })}{' '}
+                  {formatNumber(
+                    ethSupplyAndStakingMetrics?.supply_change_24hr,
+                    {
+                      showSign: true,
+                    }
+                  )}{' '}
                   since yesterday
                 </p>
               </CardContent>
@@ -91,14 +100,16 @@ export default async function DashboardPage() {
                 <CardTitle className="text-sm font-medium">
                   Ether Staked
                 </CardTitle>
-                <Clock4Icon className="h-4 w-4 text-muted-foreground" />
+                <p className="text-xs text-muted-foreground">
+                  {getLastUpdated(ethSupplyAndStakingMetricsExec)}
+                </p>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {formatNumber(ethSupplyAndStakingMetrics.current_staked)}
+                  {formatNumber(ethSupplyAndStakingMetrics?.current_staked)}
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {formatNumber(ethSupplyAndStakingMetrics.stake_ratio)}% of
+                  {formatNumber(ethSupplyAndStakingMetrics?.stake_ratio)}% of
                   supply
                 </p>
               </CardContent>
@@ -108,7 +119,9 @@ export default async function DashboardPage() {
                 <CardTitle className="text-sm font-medium">
                   Active Validators
                 </CardTitle>
-                <ShieldCheckIcon className="h-4 w-4 text-muted-foreground" />
+                <p className="text-xs text-muted-foreground">
+                  Updated just now
+                </p>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -123,24 +136,32 @@ export default async function DashboardPage() {
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Card className="col-span-4">
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between gap-4 space-y-0">
                 <CardTitle>Daily Active Addresses (L1)</CardTitle>
+                <p className="text-xs text-muted-foreground">
+                  {getLastUpdated(dailyEthereumParticipants.execution_ended_at)}
+                </p>
               </CardHeader>
               <CardContent className="pl-2">
                 <ActiveAddresses
-                  dailyParticipants={dailyEthereumParticipants}
+                  dailyParticipants={dailyEthereumParticipants.result?.rows}
                 />
               </CardContent>
             </Card>
             <Card className="col-span-3">
-              <CardHeader>
-                <CardTitle>Ethereum L2 TVL</CardTitle>
-                <CardDescription>
-                  Blockchains that use Ethereum as a base layer for security.
-                </CardDescription>
+              <CardHeader className="flex flex-row items-center justify-between gap-4 space-y-0">
+                <div className="grid gap-1">
+                  <CardTitle>Ethereum L2 TVL</CardTitle>
+                  <CardDescription>
+                    Scaling solutions built on Ethereum.
+                  </CardDescription>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {getLastUpdated(l2Summary.execution_ended_at)}
+                </p>
               </CardHeader>
               <CardContent>
-                <L2Tvl data={l2Summary} />
+                <L2Tvl data={l2Summary.result?.rows} />
               </CardContent>
             </Card>
           </div>

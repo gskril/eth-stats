@@ -8,8 +8,10 @@ import { formatNumber } from '@/lib/utils'
 export function ActiveAddresses({
   dailyParticipants,
 }: {
-  dailyParticipants: DailyEthereumParticipants[]
+  dailyParticipants: DailyEthereumParticipants[] | undefined
 }) {
+  if (!dailyParticipants) return null
+
   const data = dailyParticipants
     .slice(0, 12)
     .reverse()

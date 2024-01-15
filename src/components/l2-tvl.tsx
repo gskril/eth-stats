@@ -2,7 +2,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { L2Summary } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
 
-export function L2Tvl({ data }: { data: L2Summary[] }) {
+export function L2Tvl({ data }: { data: L2Summary[] | undefined }) {
+  if (!data) return null
+
   return (
     <div className="space-y-8">
       {data.slice(0, 5).map((l2) => {
