@@ -23,6 +23,10 @@ export const revalidate = 3600 // revalidate at most every hour
 export const metadata: Metadata = {
   title: 'Ethereum Dashboard',
   description: 'Unbiased dashboard of Ethereum metrics.',
+  metadataBase: new URL('https://eth-stats.vercel.app/'),
+  openGraph: {
+    images: ['/sharing.jpg'],
+  },
 }
 
 export default async function DashboardPage() {
